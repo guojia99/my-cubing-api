@@ -77,3 +77,9 @@ func BestPodiumReport(svc *svc.Context) gin.HandlerFunc {
 		ctx.JSON(http.StatusOK, svc.Core.GetPodiums())
 	}
 }
+
+func BestRelativeSor(svc *svc.Context) gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		ctx.JSON(http.StatusOK, svc.Core.GetRelativeSor())
+	}
+}

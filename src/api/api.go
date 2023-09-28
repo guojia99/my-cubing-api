@@ -32,7 +32,7 @@ func (c *Client) Run() error {
 		gin.Logger(),
 		gin.Recovery(),
 		CorsMiddleware(),
-		NewRateMiddleware(20),
+		NewRateMiddleware(10),
 		NewStatusCodeGreaterThan(400),
 	)
 	c.initRoute()

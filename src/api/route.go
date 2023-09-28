@@ -58,6 +58,7 @@ func (c *Client) initRoute() {
 			rp.GET("/best/all_scores", report.BestAllScoreReport(c.svc)) // 获取项目每个玩家最佳成绩
 			rp.GET("/best/sor", report.BestSorReport(c.svc))             // 获取所有角色的sor汇总榜单
 			rp.GET("/best/podium", report.BestPodiumReport(c.svc))       // 获取所有玩家领奖台的排行
+			rp.GET("/best/relative_sor", report.BestRelativeSor(c.svc))  // 排位分数
 
 			// 具体到比赛
 			rp.GET("/contest/:contest_id/sor", report.ContestSorReport(c.svc))       // 某比赛的sor

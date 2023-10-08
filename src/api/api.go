@@ -11,6 +11,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
+	"github.com/guojia99/my-cubing-api/src/api/middleware"
 	"github.com/guojia99/my-cubing-api/src/svc"
 )
 
@@ -31,9 +32,9 @@ func (c *Client) Run() error {
 	c.e.Use(
 		gin.Logger(),
 		gin.Recovery(),
-		CorsMiddleware(),
-		NewRateMiddleware(10),
-		NewStatusCodeGreaterThan(400),
+		middleware.CorsMiddleware(),
+		middleware.NewRateMiddleware(10),
+		middleware.NewStatusCodeGreaterThan(400),
 	)
 	c.initRoute()
 

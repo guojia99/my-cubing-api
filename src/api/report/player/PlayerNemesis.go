@@ -10,7 +10,7 @@ import (
 	"github.com/guojia99/my-cubing-api/src/svc"
 )
 
-func OldEnemy(svc *svc.Context) gin.HandlerFunc {
+func Nemesis(svc *svc.Context) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var req CommonRequest
 		if err := ctx.BindUri(&req); err != nil {
@@ -23,6 +23,6 @@ func OldEnemy(svc *svc.Context) gin.HandlerFunc {
 			return
 		}
 
-		ctx.JSON(http.StatusOK, svc.Core.GetPlayerOldEnemy(player.ID))
+		ctx.JSON(http.StatusOK, svc.Core.GetPlayerNemesis(player.ID))
 	}
 }

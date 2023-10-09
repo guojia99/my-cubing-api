@@ -32,6 +32,6 @@ func AddReportRoute(g *gin.RouterGroup, svc *svc.Context) {
 	rp.GET("/player/:player_id/podium", player.PodiumReport(svc))      // 某个玩家的领奖台
 	rp.GET("/player/:player_id/record", player.Record(svc))            // 某个玩家的记录
 	rp.GET("/player/:player_id/sor", player.Sor(svc))                  // 玩家的sor统计
-	rp.GET("/player/:player_id/old_enemy", player.OldEnemy(svc))       // 玩家宿敌列表
+	rp.GET("/player/:player_id/nemesis", player.Nemesis(svc))          // 玩家宿敌列表
 	rp.GET("/player/:player_id/relative_sor", player.RelativeSor(svc)) // 玩家排位分数
 }

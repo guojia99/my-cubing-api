@@ -5,11 +5,12 @@ import (
 
 	"github.com/guojia99/my-cubing-api/src/api/result/contest"
 	"github.com/guojia99/my-cubing-api/src/api/result/player"
+	"github.com/guojia99/my-cubing-api/src/api/result/pre_score"
 	"github.com/guojia99/my-cubing-api/src/api/result/score"
 	"github.com/guojia99/my-cubing-api/src/svc"
 )
 
-func AddResultRoute(api *gin.RouterGroup, authMiddleware gin.HandlerFunc, svc *svc.Context) {
+func AddResultRoute(api *gin.RouterGroup, playerMiddleware, authMiddleware gin.HandlerFunc, svc *svc.Context) {
 	{ // 玩家
 		api.GET("/players", player.GetPlayers(svc))                                // 获取玩家列表
 		api.GET("/player/:player_id", player.GetPlayer(svc))                       // 获取单个玩家信息
@@ -31,5 +32,16 @@ func AddResultRoute(api *gin.RouterGroup, authMiddleware gin.HandlerFunc, svc *s
 		api.POST("/score", authMiddleware, score.CreateScore(svc))                                    // 上传成绩
 		api.PUT("/score/end_contest", authMiddleware, score.EndContest(svc))                          // 结束比赛并统计
 		api.DELETE("/score/:score_id", authMiddleware, score.DeleteScore(svc))                        // 删除成绩
+	}
+
+	{ // 预录入成绩
+		api.POST("/pre_scores", playerMiddleware, pre_score.AddPreScore(svc))                           // 选手录入成绩
+		api.GET("/pre_scores", authMiddleware, pre_score.GetPreScores(svc))                             // 获取某场比赛的所有预录入成绩
+		api.GET("/pre_scores/contest/:contest_id", authMiddleware, pre_score.GetPreScoreByContest(svc)) // 按比赛获取预录入成绩
+		api.GET("/pre_scores/player/:player_id", authMiddleware, pre_score.GetPreScoreByPlayer(svc))    // 按玩家获取预录入成绩
+		api.PUT("/pre_scores/:pre_score_id/delete", authMiddleware, pre_score.DeletePreScore(svc))      // 删除某个预录入成绩
+		api.PUT("/pre_scores/:pre_score_id/record", authMiddleware, pre_score.RecordPreScore(svc))      // 录入预录入成绩
+		api.PUT("/pre_scores/:pre_score_id/neglect", authMiddleware, pre_score.NeglectPreScore(svc))    // 忽略预录入成绩
+
 	}
 }

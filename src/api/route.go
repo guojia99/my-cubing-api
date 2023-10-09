@@ -16,8 +16,10 @@ func (c *Client) initRoute() {
 	api := c.e.Group("/v2/api")
 
 	api.POST("/auth/token", c.ValidToken) // 获取授权
+	api.POST("/auth/token/:player_id")    // 获取玩家授权
 
-	result.AddResultRoute(api, c.AuthMiddleware, c.svc)
+	// todo player middleware
+	result.AddResultRoute(api, nil, c.AuthMiddleware, c.svc)
 	xlog.AddXLogRoute(api, c.AuthMiddleware, c.svc)
 	report.AddReportRoute(api, c.svc)
 }

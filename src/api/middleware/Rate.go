@@ -6,6 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/time/rate"
 	"k8s.io/apimachinery/pkg/util/cache"
+
+	"github.com/guojia99/my-cubing-api/src/api/common"
 )
 
 func NewRateMiddleware(secondRete int) gin.HandlerFunc {
@@ -21,7 +23,7 @@ func NewRateMiddleware(secondRete int) gin.HandlerFunc {
 		}
 
 		if !r.Allow() {
-			ctx.AbortWithStatusJSON(http.StatusTooManyRequests, gin.H{"error": "too many req"})
+			common.Error(ctx, http.StatusTooManyRequests, 1, "请求过于频繁")
 			return
 		}
 		ctx.Next()

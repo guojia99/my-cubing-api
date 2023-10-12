@@ -19,7 +19,7 @@ func Record(svc *svc.Context) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var req CommonRequest
 		if err := ctx.BindUri(&req); err != nil {
-			common.Error(ctx, http.StatusBadRequest, 0, err)
+			common.Error(ctx, http.StatusBadRequest, 0, "获取不到该比赛的记录数据")
 			return
 		}
 		ctx.JSON(http.StatusOK, svc.Core.GetContestRecord(req.ContestID))

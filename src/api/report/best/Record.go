@@ -24,7 +24,7 @@ func Records(svc *svc.Context) gin.HandlerFunc {
 
 		count, records, err := svc.Core.GetRecords(page, size)
 		if err != nil {
-			common.Error(ctx, http.StatusBadRequest, 0, err)
+			common.Error(ctx, http.StatusBadRequest, 0, "获取不到记录列表数据")
 			return
 		}
 		ctx.JSON(http.StatusOK, RecordsResponse{

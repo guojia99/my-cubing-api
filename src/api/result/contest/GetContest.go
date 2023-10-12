@@ -19,7 +19,7 @@ func GetContest(svc *svc.Context) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var req GetContestRequest
 		if err := ctx.BindUri(&req); err != nil {
-			common.Error(ctx, http.StatusBadRequest, 0, err)
+			common.Error(ctx, http.StatusBadRequest, 0, "(获取比赛)创建比赛需要正确参数")
 			return
 		}
 		contest, err := svc.Core.GetContest(req.ContestID)

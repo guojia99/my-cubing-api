@@ -34,7 +34,7 @@ func (c *Client) Run() error {
 		gin.Recovery(),
 		middleware.CorsMiddleware(),
 		middleware.NewRateMiddleware(10),
-		middleware.NewStatusCodeGreaterThan(400),
+		//middleware.NewStatusCodeGreaterThan(500),
 	)
 	c.initRoute()
 

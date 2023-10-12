@@ -23,7 +23,7 @@ func GetPlayers(svc *svc.Context) gin.HandlerFunc {
 		size, _ := strconv.Atoi(ctx.DefaultQuery("size", "100"))
 		count, players, err := svc.Core.GetPlayers(page, size)
 		if err != nil {
-			common.Error(ctx, http.StatusBadRequest, 0, err)
+			common.Error(ctx, http.StatusBadRequest, 0, "错误"+err.Error())
 			return
 		}
 		var resp = PlayersResponse{

@@ -19,7 +19,7 @@ func GetPlayer(svc *svc.Context) gin.HandlerFunc {
 
 		out, err := svc.Core.GetPlayer(req.Id)
 		if err != nil {
-			common.Error(ctx, http.StatusBadRequest, 0, err)
+			common.Error(ctx, http.StatusBadRequest, 0, "查询不到该选手")
 			return
 		}
 

@@ -28,7 +28,7 @@ func GetContests(svc *svc.Context) gin.HandlerFunc {
 
 		count, contests, err := svc.Core.GetContests(page, size, typ)
 		if err != nil {
-			common.Error(ctx, http.StatusBadRequest, 0, err)
+			common.Error(ctx, http.StatusBadRequest, 0, "获取比赛列表错误"+err.Error())
 			return
 		}
 

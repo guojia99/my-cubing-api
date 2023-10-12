@@ -25,7 +25,7 @@ func ScoreReport(svc *svc.Context) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var req CommonRequest
 		if err := ctx.BindUri(&req); err != nil {
-			common.Error(ctx, http.StatusBadRequest, 0, err)
+			common.Error(ctx, http.StatusBadRequest, 0, "获取不到该比赛成绩列表")
 			return
 		}
 		ctx.JSON(http.StatusOK, ScoreReportResponse{

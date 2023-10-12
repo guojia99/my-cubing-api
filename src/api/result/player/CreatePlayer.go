@@ -14,12 +14,12 @@ func CreatePlayer(svc *svc.Context) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var req model.Player
 		if err := ctx.Bind(&req); err != nil {
-			common.Error(ctx, http.StatusBadRequest, 0, err)
+			common.Error(ctx, http.StatusBadRequest, 0, "参数错误")
 			return
 		}
 
 		if err := svc.Core.AddPlayer(req); err != nil {
-			common.Error(ctx, http.StatusBadRequest, 0, err)
+			common.Error(ctx, http.StatusBadRequest, 0, "错误"+err.Error())
 			return
 		}
 		ctx.JSON(http.StatusOK, gin.H{})

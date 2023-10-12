@@ -18,12 +18,12 @@ func GetScores(svc *svc.Context) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var req GetScoresRequest
 		if err := ctx.BindUri(&req); err != nil {
-			common.Error(ctx, http.StatusBadRequest, 0, err)
+			common.Error(ctx, http.StatusBadRequest, 0, "错误"+err.Error())
 			return
 		}
 		scores, err := svc.Core.GetScoreByPlayerContest(req.PlayerID, req.ContestID)
 		if err != nil {
-			common.Error(ctx, http.StatusBadRequest, 0, err)
+			common.Error(ctx, http.StatusBadRequest, 0, "错误"+err.Error())
 			return
 		}
 		ctx.JSON(http.StatusOK, scores)

@@ -19,11 +19,11 @@ func DeleteScore(svc *svc.Context) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var req DeleteScoreRequest
 		if err := ctx.BindUri(&req); err != nil {
-			common.Error(ctx, http.StatusBadRequest, 0, err)
+			common.Error(ctx, http.StatusBadRequest, 0, "错误"+err.Error())
 			return
 		}
 		if err := svc.Core.RemoveScore(req.ScoreID); err != nil {
-			common.Error(ctx, http.StatusBadRequest, 0, err)
+			common.Error(ctx, http.StatusBadRequest, 0, "错误"+err.Error())
 			return
 		}
 		ctx.JSON(http.StatusOK, gin.H{})

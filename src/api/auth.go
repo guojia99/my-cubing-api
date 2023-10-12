@@ -9,7 +9,6 @@ package api
 import (
 	"crypto/rand"
 	"encoding/base64"
-	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -17,6 +16,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
+
+	"github.com/guojia99/my-cubing-api/src/api/common"
 )
 
 type Admin struct {
@@ -47,21 +48,21 @@ type (
 func (c *Client) ValidToken(ctx *gin.Context) {
 	var req GetTokenRequest
 	if err := ctx.Bind(&req); err != nil {
-		ctx.JSON(http.StatusNetworkAuthenticationRequired, gin.H{"error": err.Error()})
+		common.Error(ctx, http.StatusNetworkAuthenticationRequired, 20, "密码格式错误")
 		return
 	}
 	if req.UserName == "" || req.PassWord == "" {
-		ctx.JSON(http.StatusNetworkAuthenticationRequired, gin.H{"error": "request has empty"})
+		common.Error(ctx, http.StatusNetworkAuthenticationRequired, 20, "密码格式错误")
 		return
 	}
 
 	var admin Admin
 	if err := c.svc.DB.Where("user_name = ?", req.UserName).First(&admin).Error; err != nil {
-		ctx.JSON(http.StatusNetworkAuthenticationRequired, gin.H{"error": err.Error()})
+		common.Error(ctx, http.StatusNetworkAuthenticationRequired, 20, "查询不到角色")
 		return
 	}
 	if admin.Password != req.PassWord {
-		ctx.JSON(http.StatusNetworkAuthenticationRequired, gin.H{"error": "password error"})
+		common.Error(ctx, http.StatusNetworkAuthenticationRequired, 20, "密码错误")
 		return
 	}
 	if time.Now().Sub(admin.Timeout) > 0 || admin.Token == "" {
@@ -91,7 +92,7 @@ func (c *Client) AuthMiddleware(ctx *gin.Context) {
 	log.Printf("auth in %s", ctx.ClientIP())
 	token := ctx.GetHeader("Authorization")
 	if token == "" {
-		ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "auth error"})
+		common.Error(ctx, http.StatusUnauthorized, 21, "权限不足")
 		return
 	}
 
@@ -104,11 +105,11 @@ func (c *Client) AuthMiddleware(ctx *gin.Context) {
 	// 查token 是否合法
 	var admin Admin
 	if err := c.svc.DB.Where("token = ?", token).First(&admin).Error; err != nil {
-		ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": fmt.Sprintf("auth error token %s", err)})
+		common.Error(ctx, http.StatusUnauthorized, 21, "权限不足")
 		return
 	}
 	if time.Now().Sub(admin.Timeout) > 0 {
-		ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "token timeout"})
+		common.Error(ctx, http.StatusUnauthorized, 21, "权限过期")
 		return
 	}
 

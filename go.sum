@@ -33,8 +33,8 @@ github.com/google/go-cmp v0.5.9/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeN
 github.com/google/gofuzz v1.0.0/go.mod h1:dBl0BpW6vV/+mYPU4Po3pmUjxk6FQPldtuIdl/M65Eg=
 github.com/google/uuid v1.3.0 h1:t6JiXgmwXMjEs8VusXIJk2BXHsn+wx8BZdTaoZ5fu7I=
 github.com/google/uuid v1.3.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
-github.com/guojia99/my-cubing-core v0.1.18 h1:31pbv3zS0GT2WENF7sjuJPP1w5stE8x/yJDcAQx3MK0=
-github.com/guojia99/my-cubing-core v0.1.18/go.mod h1:+BnHQh/5L/uqDJcJlaqNWx7QhhmBri7McZGOOpNxH+E=
+github.com/guojia99/my-cubing-core v0.1.19 h1:zxNvNtWazFTqp42M3gv75nGnpjyqk1OGdqNwGEEI9z0=
+github.com/guojia99/my-cubing-core v0.1.19/go.mod h1:+BnHQh/5L/uqDJcJlaqNWx7QhhmBri7McZGOOpNxH+E=
 github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8=
 github.com/inconshreveable/mousetrap v1.1.0/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
 github.com/jinzhu/inflection v1.0.0 h1:K317FqzuhWc8YvSVlFMCCUb36O/S9MCKRDI7QkRKD/E=

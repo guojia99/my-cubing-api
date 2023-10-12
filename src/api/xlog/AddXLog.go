@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
+	"github.com/guojia99/my-cubing-api/src/api/common"
 	"github.com/guojia99/my-cubing-api/src/svc"
 )
 
@@ -14,7 +15,7 @@ func AddXLog(svc *svc.Context) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var req XLog
 		if err := ctx.Bind(&req); err != nil {
-			ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			common.Error(ctx, http.StatusBadRequest, 1, "错误"+err.Error())
 			return
 		}
 		svc.DB.Save(&XLog{

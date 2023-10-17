@@ -105,11 +105,11 @@ func (c *Client) AuthMiddleware(ctx *gin.Context) {
 	// 查token 是否合法
 	var admin Admin
 	if err := c.svc.DB.Where("token = ?", token).First(&admin).Error; err != nil {
-		common.Error(ctx, http.StatusUnauthorized, 21, "权限不足")
+		common.Error(ctx, http.StatusUnauthorized, 22, "权限不足")
 		return
 	}
 	if time.Now().Sub(admin.Timeout) > 0 {
-		common.Error(ctx, http.StatusUnauthorized, 21, "权限过期")
+		common.Error(ctx, http.StatusUnauthorized, 23, "权限过期")
 		return
 	}
 

@@ -4,10 +4,17 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	core "github.com/guojia99/my-cubing-core"
 
 	"github.com/guojia99/my-cubing-api/src/api/common"
 	"github.com/guojia99/my-cubing-api/src/svc"
 )
+
+type GetPlayerDetail struct {
+	core.PlayerDetail
+
+	QQ string
+}
 
 func GetPlayer(svc *svc.Context) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
@@ -23,6 +30,11 @@ func GetPlayer(svc *svc.Context) gin.HandlerFunc {
 			return
 		}
 
-		ctx.JSON(http.StatusOK, out)
+		pu := svc.Core.GetPlayerUser(out.Player)
+		resp := GetPlayerDetail{
+			PlayerDetail: out,
+			QQ:           pu.QQ,
+		}
+		ctx.JSON(http.StatusOK, resp)
 	}
 }

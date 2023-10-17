@@ -35,13 +35,12 @@ func AddResultRoute(api *gin.RouterGroup, playerMiddleware, authMiddleware gin.H
 	}
 
 	{ // 预录入成绩
-		api.POST("/pre_scores", playerMiddleware, pre_score.AddPreScore(svc))                           // 选手录入成绩
+		api.POST("/pre_scores", pre_score.AddPreScore(svc))                                             // 选手录入成绩
 		api.GET("/pre_scores", authMiddleware, pre_score.GetPreScores(svc))                             // 获取某场比赛的所有预录入成绩
 		api.GET("/pre_scores/contest/:contest_id", authMiddleware, pre_score.GetPreScoreByContest(svc)) // 按比赛获取预录入成绩
-		api.GET("/pre_scores/player/:player_id", authMiddleware, pre_score.GetPreScoreByPlayer(svc))    // 按玩家获取预录入成绩
+		api.GET("/pre_scores/player/:player_id", playerMiddleware, pre_score.GetPreScoreByPlayer(svc))  // 按玩家获取预录入成绩
 		api.PUT("/pre_scores/:pre_score_id/delete", authMiddleware, pre_score.DeletePreScore(svc))      // 删除某个预录入成绩
 		api.PUT("/pre_scores/:pre_score_id/record", authMiddleware, pre_score.RecordPreScore(svc))      // 录入预录入成绩
 		api.PUT("/pre_scores/:pre_score_id/neglect", authMiddleware, pre_score.NeglectPreScore(svc))    // 忽略预录入成绩
-
 	}
 }

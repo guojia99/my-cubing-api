@@ -22,6 +22,7 @@ func DeletePlayer(svc *svc.Context) gin.HandlerFunc {
 			common.Error(ctx, http.StatusBadRequest, 0, "错误"+err.Error())
 			return
 		}
+
 		ctx.JSON(http.StatusOK, gin.H{})
 	}
 }

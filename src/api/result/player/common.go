@@ -18,3 +18,16 @@ type Images struct {
 func (Images) TableName() string {
 	return "player_images"
 }
+
+type CommonPlayerRequest struct {
+	ID uint `json:"ID"`
+
+	Name       string   `json:"Name"`                 // 选手名
+	WcaID      string   `json:"WcaID,omitempty"`      // 选手WcaID，用于查询选手WCA的成绩
+	ActualName string   `json:"ActualName,omitempty"` // 真实姓名
+	TitlesVal  []string `json:"TitlesVal,omitempty"`  // 头衔
+	LoginID    string   `json:"LoginID"`              // 登录自定义ID
+	QQ         string   `json:"QQ"`                   // qq号
+	WeChat     string   `json:"WeChat"`               // 微信号
+	Phone      string   `json:"Phone"`                // 手机号
+}

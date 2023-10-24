@@ -25,6 +25,7 @@ func AddReportRoute(g *gin.RouterGroup, svc *svc.Context) {
 	rp.GET("/contest/:contest_id/score", contest.ScoreReport(svc))   // 某比赛的成绩统计
 	rp.GET("/contest/:contest_id/podium", contest.PodiumReport(svc)) // 某场比赛领奖台
 	rp.GET("/contest/:contest_id/record", contest.Record(svc))       // 某场比赛的记录
+	rp.GET("/contests/statics", contest.StaticsReport(svc))
 
 	// 具体到个人
 	rp.GET("/player/:player_id/best", player.Best(svc))                // 某玩家的最佳成绩

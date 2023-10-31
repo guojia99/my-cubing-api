@@ -19,7 +19,7 @@ buildx:
 install:
 	go mod tidy
 	go mod vendor
-	go build -o -v mycube main.go
+	go build -v -o mycube main.go
 	systemctl stop mycube.service
 	cp mycube /usr/local/bin/mycube
 	systemctl restart mycube.service

@@ -11,6 +11,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
+	"github.com/guojia99/my-cubing-api/src/api/auth"
 	"github.com/guojia99/my-cubing-api/src/api/middleware"
 	"github.com/guojia99/my-cubing-api/src/svc"
 )
@@ -25,7 +26,7 @@ type Client struct {
 }
 
 func (c *Client) Run() error {
-	c.initAuth()
+	auth.InitAuth(c.svc)
 
 	gin.SetMode(c.svc.Cfg.GinMode)
 	c.e = gin.New()

@@ -13,7 +13,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/guojia99/my-cubing-api/src"
-	"github.com/guojia99/my-cubing-api/src/api"
+	"github.com/guojia99/my-cubing-api/src/api/auth"
 	"github.com/guojia99/my-cubing-api/src/svc"
 )
 
@@ -49,10 +49,10 @@ func NewAdminCmd() *cobra.Command {
 				return err
 			}
 
-			if err = svcCli.DB.AutoMigrate(&api.Admin{}); err != nil {
+			if err = svcCli.DB.AutoMigrate(&auth.Admin{}); err != nil {
 				return err
 			}
-			err = svcCli.DB.Save(&api.Admin{
+			err = svcCli.DB.Save(&auth.Admin{
 				UserName: name,
 				Password: password,
 				Timeout:  time.Now(),

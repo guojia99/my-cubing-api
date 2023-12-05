@@ -32,6 +32,7 @@ func AddResultRoute(api *gin.RouterGroup, playerMiddleware, authMiddleware gin.H
 		api.POST("/score", authMiddleware, score.CreateScore(svc))                                    // 上传成绩
 		api.PUT("/score/end_contest", authMiddleware, score.EndContest(svc))                          // 结束比赛并统计
 		api.DELETE("/score/:score_id", authMiddleware, score.DeleteScore(svc))                        // 删除成绩
+		api.POST("/score/reset_records", authMiddleware, score.ResetRecords(svc))                     // 重置记录列表
 	}
 
 	{ // 预录入成绩

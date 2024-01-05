@@ -30,6 +30,7 @@ func GetPlayer(svc *svc.Context) gin.HandlerFunc {
 			return
 		}
 
+		out.Player.GetTitles()
 		pu := svc.Core.GetPlayerUser(out.Player)
 		resp := GetPlayerDetail{
 			PlayerDetail: out,

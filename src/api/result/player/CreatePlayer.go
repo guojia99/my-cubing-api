@@ -26,14 +26,14 @@ func CreatePlayer(svc *svc.Context) gin.HandlerFunc {
 			TitlesVal:  req.TitlesVal,
 		}
 		if err := svc.Core.AddPlayer(p); err != nil {
-			common.Error(ctx, http.StatusBadRequest, 0, "写入错误"+err.Error())
+			common.Error(ctx, http.StatusBadRequest, 0, "写入错误", err)
 			return
 		}
 
 		// 回查玩家信息
 		var player model.Player
 		if err := svc.DB.First(&player, "name = ?", p.Name).Error; err != nil {
-			common.Error(ctx, http.StatusBadRequest, 0, "读取错误"+err.Error())
+			common.Error(ctx, http.StatusBadRequest, 0, "读取错误", err)
 			return
 		}
 
@@ -45,7 +45,7 @@ func CreatePlayer(svc *svc.Context) gin.HandlerFunc {
 			Phone:    req.Phone,
 		}
 		if err := svc.Core.AddPlayerUser(player, pu); err != nil {
-			common.Error(ctx, http.StatusBadRequest, 0, "写入玩家用户信息"+err.Error())
+			common.Error(ctx, http.StatusBadRequest, 0, "写入玩家用户信息", err)
 			return
 		}
 

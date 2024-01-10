@@ -12,20 +12,24 @@ type ErrorMessage struct {
 	StatusCode int    `json:"StatusCode"`
 }
 
-func Error(ctx *gin.Context, statusCode int, code int, err any) {
+func Error(ctx *gin.Context, statusCode int, code int, err ...any) {
 	var msg string
-	switch data := err.(type) {
-	case string:
-		msg = data
-	case error:
-		msg = data.Error()
-	default:
-		msg = fmt.Sprintf("%+v", msg)
+	for _, er := range err {
+		switch data := er.(type) {
+		case string:
+			msg += data
+		case error:
+			msg += data.Error()
+		default:
+			msg += fmt.Sprintf("%+v", msg)
+		}
 	}
 
-	ctx.JSON(statusCode, ErrorMessage{
-		Msg:        msg,
-		Code:       code,
-		StatusCode: statusCode,
-	})
+	ctx.JSON(
+		statusCode, ErrorMessage{
+			Msg:        msg,
+			Code:       code,
+			StatusCode: statusCode,
+		},
+	)
 }

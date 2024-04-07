@@ -41,14 +41,16 @@ func CreateScore(svc *svc.Context) gin.HandlerFunc {
 			req.PlayerID = p.ID
 		}
 
-		if err := svc.Core.AddScore(core.AddScoreRequest{
-			PlayerID:  req.PlayerID,
-			ContestID: req.ContestID,
-			Project:   req.Project,
-			RoundId:   req.RouteID,
-			Result:    req.Results,
-			Penalty:   req.Penalty,
-		}); err != nil {
+		if err := svc.Core.AddScore(
+			core.AddScoreRequest{
+				PlayerID:  req.PlayerID,
+				ContestID: req.ContestID,
+				Project:   req.Project,
+				RoundId:   req.RouteID,
+				Result:    req.Results,
+				Penalty:   req.Penalty,
+			},
+		); err != nil {
 			common.Error(ctx, http.StatusBadRequest, 0, "错误"+err.Error())
 			return
 		}

@@ -10,6 +10,7 @@ import (
 	"github.com/guojia99/my-cubing-api/src/api/auth"
 	"github.com/guojia99/my-cubing-api/src/api/report"
 	"github.com/guojia99/my-cubing-api/src/api/result"
+	"github.com/guojia99/my-cubing-api/src/api/stat"
 	"github.com/guojia99/my-cubing-api/src/api/xlog"
 )
 
@@ -23,4 +24,5 @@ func (c *Client) initRoute() {
 	result.AddResultRoute(api, nil, auth.ValidMiddleware(c.svc), c.svc)
 	xlog.AddXLogRoute(api, auth.ValidMiddleware(c.svc), c.svc)
 	report.AddReportRoute(api, c.svc)
+	stat.AddStatRoute(api, c.svc)
 }

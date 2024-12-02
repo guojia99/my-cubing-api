@@ -7,11 +7,11 @@
 package svc
 
 import (
+	"github.com/patrickmn/go-cache"
 	"time"
 
 	core "github.com/guojia99/my-cubing-core"
 	"github.com/guojia99/my-cubing-core/model"
-	"github.com/patrickmn/go-cache"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -51,6 +51,6 @@ func NewContext(config string) (*Context, error) {
 		return nil, err
 	}
 
-	ctx.Core = core.NewCore(ctx.DB, ctx.Cfg.Debug, time.Minute*60)
+	ctx.Core = core.NewCore(ctx.DB, ctx.Cfg.Debug, time.Second*15)
 	return ctx, nil
 }

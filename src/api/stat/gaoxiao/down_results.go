@@ -30,7 +30,7 @@ func removeRepeatedElement[S ~[]E, E comparable](s S) S {
 func getWcaIDs() []string {
 	f, err := os.ReadFile(filePath)
 	if err != nil {
-		panic(err)
+		return []string{}
 	}
 	data := string(f)
 

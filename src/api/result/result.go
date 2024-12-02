@@ -22,17 +22,19 @@ func AddResultRoute(api *gin.RouterGroup, playerMiddleware, authMiddleware gin.H
 		api.POST("/player/:player_id/images", authMiddleware, player.CreatePlayerImages(svc)) // 创建玩家头像、背景等信息
 	}
 	{ // 比赛
-		api.GET("/contests", contest.GetContests(svc))                                 // 获取比赛列表
-		api.GET("/contest/:contest_id", contest.GetContest(svc))                       // 获取单场比赛信息
-		api.POST("/contest", authMiddleware, contest.CreateContest(svc))               // 添加比赛
-		api.DELETE("/contest/:contest_id", authMiddleware, contest.DeleteContest(svc)) // 删除比赛
+		api.GET("/contests", contest.GetContests(svc))                                    // 获取比赛列表
+		api.GET("/contest/:contest_id", contest.GetContest(svc))                          // 获取单场比赛信息
+		api.POST("/contest", authMiddleware, contest.CreateContest(svc))                  // 添加比赛
+		api.DELETE("/contest/:contest_id", authMiddleware, contest.DeleteContest(svc))    // 删除比赛
+		api.PUT("/contest/update_group", authMiddleware, contest.UpdateContestGroup(svc)) // 更新比赛的群组
 	}
 	{ // 成绩
 		api.GET("/score/player/:player_id/contest/:contest_id", authMiddleware, score.GetScores(svc)) // 获取某场比赛玩家的所有成绩
 		api.POST("/score", authMiddleware, score.CreateScore(svc))                                    // 上传成绩
 		api.PUT("/score/end_contest", authMiddleware, score.EndContest(svc))                          // 结束比赛并统计
-		api.DELETE("/score/:score_id", authMiddleware, score.DeleteScore(svc))                        // 删除成绩
-		api.POST("/score/reset_records", authMiddleware, score.ResetRecords(svc))                     // 重置记录列表
+
+		api.DELETE("/score/:score_id", authMiddleware, score.DeleteScore(svc))    // 删除成绩
+		api.POST("/score/reset_records", authMiddleware, score.ResetRecords(svc)) // 重置记录列表
 	}
 
 	{ // 预录入成绩

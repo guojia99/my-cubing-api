@@ -35,9 +35,12 @@ func getWcaIDs() []string {
 	data := string(f)
 
 	line := strings.Split(data, "\n")
+	var newLines []string
 	for i := range line {
-		newLine := strings.Split(line[i], ".")[1]
-		line[i] = strings.ReplaceAll(newLine, " ", "")
+		newLine := strings.Split(line[i], ".")
+		if len(newLine) >= 2 {
+			newLines = append(newLines, strings.ReplaceAll(newLine[1], " ", ""))
+		}
 	}
 	line = removeRepeatedElement(line)
 	return line
